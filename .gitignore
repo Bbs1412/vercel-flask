@@ -174,3 +174,4 @@ cython_debug/
 # Custom
 .vscode
 temp_*
+.vercel

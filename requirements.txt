@@ -2,3 +2,4 @@ flask
 Pyrebase4==4.8.0
 python-dotenv
 # Pyrebase4==4.7.1
+setuptools
