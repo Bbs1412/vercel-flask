@@ -4,7 +4,12 @@ from flask import Flask, jsonify, request, send_from_directory, render_template
 from fbase import login_to_firebase, read_node
 
 # Config:
-app = Flask(__name__)
+# get this code files absolute path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+template_dir = os.path.join(BASE_DIR, 'Templates')
+static_dir = os.path.join(BASE_DIR, 'static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 
 
 # Test route:
@@ -17,6 +22,13 @@ def test():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# Serve the static files:
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory(static_dir, path)
+# ex. http://localhost:5454/static/css/style.css
+
 
 
 # Route for login:
@@ -50,5 +62,5 @@ if __name__ == '__main__':
     app.run(
         port=5454,
         debug=True,
-        load_dotenv=True
+        load_dotenv=True,
     )
